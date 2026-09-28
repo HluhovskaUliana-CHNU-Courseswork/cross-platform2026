@@ -1,6 +1,6 @@
-package ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts
+package ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.service
 
-import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.common.NetworkResult
+import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.common.Result
 import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.model.requests.NewPost
 import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.model.responses.DeletedPost
 import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.model.responses.Post
@@ -12,8 +12,8 @@ internal const val POSTS_API = "posts"
 internal const val ADD_POST = "add"
 
 internal interface PostApiService {
-    suspend fun getAllPosts(): NetworkResult<Posts>
-    suspend fun addPost(post: NewPost): NetworkResult<Post>
-    suspend fun updatePost(post: Post): NetworkResult<Post>
-    suspend fun deletePost(postId: Int): NetworkResult<DeletedPost>
+    suspend fun getAllPosts(): Result<Posts>
+    suspend fun addPost(post: NewPost): Result<Post>
+    suspend fun updatePost(post: Post): Result<Post>
+    suspend fun deletePost(postId: Int): Result<DeletedPost>
 }

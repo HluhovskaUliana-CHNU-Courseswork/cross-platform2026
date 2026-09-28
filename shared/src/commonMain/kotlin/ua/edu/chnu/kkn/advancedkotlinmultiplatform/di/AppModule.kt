@@ -8,14 +8,18 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
-import org.koin.plugin.module.dsl.viewModel
-import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.AppPostApiService
-import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.PostApiService
-import ua.edu.chnu.kkn.advancedkotlinmultiplatform.domain.posts.AppPostRepository
+import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.service.AppPostApiService
+import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.service.PostApiService
+import ua.edu.chnu.kkn.advancedkotlinmultiplatform.data.posts.AppPostRepository
 import ua.edu.chnu.kkn.advancedkotlinmultiplatform.domain.posts.PostRepository
+import ua.edu.chnu.kkn.advancedkotlinmultiplatform.domain.posts.create.CreatePostUseCase
+import ua.edu.chnu.kkn.advancedkotlinmultiplatform.domain.posts.edit.EditPostUseCase
+import ua.edu.chnu.kkn.advancedkotlinmultiplatform.domain.posts.obtain.ObtainPostsUseCase
+import ua.edu.chnu.kkn.advancedkotlinmultiplatform.domain.posts.remove.RemovePostUseCase
 import ua.edu.chnu.kkn.advancedkotlinmultiplatform.presentation.AppViewModel
 
 val networkModule = module {
@@ -44,5 +48,9 @@ val networkModule = module {
 val appModule = module {
     includes(networkModule)
     singleOf(::AppPostRepository) { bind<PostRepository>() }
+    factoryOf(::CreatePostUseCase)
+    factoryOf(::EditPostUseCase)
+    factoryOf(::ObtainPostsUseCase)
+    factoryOf(::RemovePostUseCase)
     viewModelOf(::AppViewModel)
 }
